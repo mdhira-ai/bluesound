@@ -2,19 +2,64 @@
   "name": "bluesound",
   "version": "0.1.0",
   "private": true,
+  "main": "main/main.js",
+  "author": "habib",
+  "description": "habib-software-industry",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dev2": "concurrently -n \"NEXT,ELECTRON\" -c \"yellow,blue\" --kill-others \"next dev\" \"electron .\"",
+    "build2": "next build && electron-builder"
+  },
+  "build": {
+    "appId": "com.habib.bluesound",
+    "extraResources": "myscripts",
+
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true
+    },
+    "productName": "bluesound",
+    "win": {
+      "icon": "/resources/icon.png",
+      "publish": [
+        "github"
+      ]
+    },
+    "linux": {
+      "icon": "/resources/icon.png",
+      "publish": [
+        "github"
+      ]
+    }
+  },
+  "electronBuilder": {
+    "compression": "maximum"
+  },
+  "repository": "https://github.com/mdhira-ai/batchwork",
+  "license": "MIT",
+  "publish": {
+    "provider": "github",
+    "releaseType": "release"
   },
   "dependencies": {
+    "@radix-ui/react-icons": "^1.3.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "electron-serve": "^1.2.0",
+    "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.0.4"
+    "tailwind-merge": "^2.2.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
+    "concurrently": "^8.2.2",
+    "electron": "^28.1.0",
+    "electron-builder": "^24.9.1",
     "postcss": "^8",
     "tailwindcss": "^3.3.0"
   }
