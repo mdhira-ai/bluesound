@@ -9,10 +9,12 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion"
 
-const MyTable = ({data}) => {
+const MyTable = ({ data }) => {
 
-    
+    const [popLayout, setPopLayout] = useState(false)
+
 
 
 
@@ -21,14 +23,16 @@ const MyTable = ({data}) => {
 
 
     return (
-        <Table className="">
+        <Table className="overflow-hidden border-none">
             <TableCaption>Bluetooth Speaker connection</TableCaption>
 
 
-            <TableHeader>
+            <TableHeader
+                className="border-none"
+            >
 
                 <TableRow
-                    className="bg-gray-900 hover:bg-gray-900"
+                    className="bg-gray-900  border-none hover:bg-gray-900"
                 >
                     <TableHead className="">Name</TableHead>
                     <TableHead>Mac Address</TableHead>
@@ -41,19 +45,44 @@ const MyTable = ({data}) => {
             >
 
 
-                {
-                    data?.map((item, index) => {
-                        return (
-                            <TableRow key={index}
-                            >
-                                <TableCell>{item.name}</TableCell>
-                                <TableCell>{item.address}</TableCell>
-                                <TableCell>{item.method}</TableCell>
-                                <TableCell className="text-right">{item.signal}</TableCell>
-                            </TableRow>
-                        )
-                    })
-                }
+                <AnimatePresence
+                    
+                    initial={false}
+
+                    mode={
+                        popLayout ? "popLayout" : "sync"
+                    }
+                >
+
+                    {
+                        data?.map((item, index) => {
+                            return (
+
+
+                                <TableRow
+                                    className="hover:bg-gray-700 cursor-pointer border-cyan-500"
+
+
+
+                                    initial={{ x: -50 }}
+
+                                    animate={{ x: 0 }}
+
+                                    // out
+                                    exit={{ x: -50 }}
+
+
+                                    key={index}
+                                >
+                                    <TableCell>{item.name}</TableCell>
+                                    <TableCell>{item.address}</TableCell>
+                                    <TableCell>{item.method}</TableCell>
+                                    <TableCell className="text-right">{item.signal}</TableCell>
+                                </TableRow>
+                            )
+                        })
+                    }
+                </AnimatePresence>
 
             </TableBody>
         </Table>

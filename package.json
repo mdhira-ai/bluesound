@@ -48,6 +48,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "electron-serve": "^1.2.0",
+    "framer-motion": "^10.17.4",
     "next": "14.0.4",
     "python-shell": "^5.0.0",
     "react": "^18",
