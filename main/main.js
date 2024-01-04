@@ -1,12 +1,14 @@
+// const Chello = require("../lib/myjs");
+const hello = require("../lib/Myshell");
 const { app, BrowserWindow, ipcMain } = require("electron");
 const serve = require("electron-serve");
 const path = require("path");
-const hello = require("../lib/myjs");
+const { PythonShell } = require('python-shell')
+
 
 const appServe = app.isPackaged ? serve({
     directory: path.join(__dirname, "../out")
 }) : null;
-
 
 let win;
 
@@ -24,9 +26,13 @@ const createWindow = () => {
 
     });
 
+    win.webContents.on('did-finish-load', () => {
+        hello(win)
+    })
 
 
-
+    
+    
 
 
 
@@ -43,20 +49,24 @@ const createWindow = () => {
     }
 }
 
-async function checkblu() {
-    let d = await hello()
 
-    console.log("this is from main.js" + d)
 
-    return d
 
-}
 
 app.on("ready", () => {
-    ipcMain.handle('checkblu', checkblu)
 
     createWindow();
+
+
+
+
+
 });
+
+
+
+
+
 
 app.on("window-all-closed", () => {
     if (process.platform !== "darwin") {

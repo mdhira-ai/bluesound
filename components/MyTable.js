@@ -31,7 +31,7 @@ const MyTable = ({data}) => {
                     className="bg-gray-900 hover:bg-gray-900"
                 >
                     <TableHead className="">Name</TableHead>
-                    <TableHead>Status</TableHead>
+                    <TableHead>Mac Address</TableHead>
                     <TableHead>Method</TableHead>
                     <TableHead className="text-right">Signal</TableHead>
                 </TableRow>
@@ -42,12 +42,12 @@ const MyTable = ({data}) => {
 
 
                 {
-                    data.map((item, index) => {
+                    data?.map((item, index) => {
                         return (
                             <TableRow key={index}
                             >
                                 <TableCell>{item.name}</TableCell>
-                                <TableCell>{item.status}</TableCell>
+                                <TableCell>{item.address}</TableCell>
                                 <TableCell>{item.method}</TableCell>
                                 <TableCell className="text-right">{item.signal}</TableCell>
                             </TableRow>
